@@ -8,30 +8,9 @@ import {
     Alert,
 } from 'react-native'
 
-import { db } from '../config'
-
-let addItem = item => {
-    db.ref('/items').push(item)
-}
-
 export default class AddItem extends Component {
     state = {
         name: '',
-    }
-
-    handleChange = e => {
-        this.setState({
-            name: e.nativeEvent.text,
-        })
-    }
-    handleSubmit = () => {
-        addItem({
-            milk: {
-                name: 'milk',
-                aisle: 1,
-            },
-        })
-        Alert.alert('Item saved successfully')
     }
 
     render() {
