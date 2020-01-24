@@ -7,6 +7,9 @@ import {
     TextInput,
     Alert,
 } from 'react-native'
+import axios from 'axios'
+import Confetti from 'react-native-confetti'
+const SERVER_URL = 'http://10.0.0.133:8080'
 
 export default class AddItem extends Component {
     constructor() {
@@ -14,10 +17,18 @@ export default class AddItem extends Component {
         this.state = {
             name: '',
         }
-        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
-    handleChange(event) {
-        this.setState({ name: event })
+    async handleSubmit() {
+        try {
+            console.log('in hand')
+            const { data } = await axios.post(
+                `${SERVER_URL}/api/products`,
+                this.state
+            )
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     render() {
@@ -26,7 +37,9 @@ export default class AddItem extends Component {
                 <Text style={styles.title}>Add Item</Text>
                 <TextInput
                     style={styles.itemInput}
-                    onChange={() => this.handleChange}
+                    onChangeText={name =>
+                        this.setState({ ...this.state, name })
+                    }
                     name="name"
                 />
                 <TouchableHighlight
