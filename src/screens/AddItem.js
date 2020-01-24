@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import axios from 'axios'
 import Confetti from 'react-native-confetti'
-const SERVER_URL = 'http://10.0.0.133:8080'
+const SERVER_URL = 'http://172.17.21.173:8080'
 
 export default class AddItem extends Component {
     constructor() {
@@ -21,9 +21,10 @@ export default class AddItem extends Component {
     }
     async handleSubmit() {
         try {
-            console.log('in hand')
+            this.setState({ name: this.state.name.toLowerCase() })
+            console.log('handle', this.state)
             const { data } = await axios.post(
-                `${SERVER_URL}/api/products`,
+                `${SERVER_URL}/api/list`,
                 this.state
             )
         } catch (err) {
@@ -37,9 +38,7 @@ export default class AddItem extends Component {
                 <Text style={styles.title}>Add Item</Text>
                 <TextInput
                     style={styles.itemInput}
-                    onChangeText={name =>
-                        this.setState({ ...this.state, name })
-                    }
+                    onChangeText={name => this.setState({ name })}
                     name="name"
                 />
                 <TouchableHighlight

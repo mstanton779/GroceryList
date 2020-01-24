@@ -14,7 +14,10 @@ export default class ItemComponent extends Component {
                     return (
                         <View key={item.id}>
                             <Text style={styles.itemtext}>
-                                Aisle {item.aisleId} {item.name}
+                                Aisle {item.aisle}{' '}
+                                {`${item.product[0].toUpperCase()}${item.product.slice(
+                                    1
+                                )}`}
                             </Text>
                         </View>
                     )
