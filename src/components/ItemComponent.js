@@ -8,15 +8,13 @@ export default class ItemComponent extends Component {
     }
 
     render() {
-        console.log(this.props.items)
         return (
             <View style={styles.itemsList}>
                 {this.props.items.map(item => {
                     return (
                         <View key={item.id}>
                             <Text style={styles.itemtext}>
-                                {item.name}
-                                {item.aisle.name}
+                                Aisle {item.aisleId} {item.name}
                             </Text>
                         </View>
                     )

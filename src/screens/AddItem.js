@@ -9,8 +9,17 @@ import {
 } from 'react-native'
 
 export default class AddItem extends Component {
-    state = {
-        name: '',
+    constructor() {
+        super()
+        this.state = {
+            name: '',
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
+    handleChange(event) {
+        // event.persist()
+        this.setState({ name: event })
+        // console.log(this.state)
     }
 
     render() {
@@ -19,7 +28,8 @@ export default class AddItem extends Component {
                 <Text style={styles.title}>Add Item</Text>
                 <TextInput
                     style={styles.itemInput}
-                    onChange={this.handleChange}
+                    onChange={() => this.handleChange}
+                    name="name"
                 />
                 <TouchableHighlight
                     style={styles.button}

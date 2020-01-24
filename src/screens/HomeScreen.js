@@ -10,7 +10,7 @@ export default class Home extends Component {
                     onPress={() => this.props.navigation.navigate('AddItem')}
                 />
                 <Button
-                    title="List of Items"
+                    title="See All Items in Grocery Store"
                     color="green"
                     onPress={() => this.props.navigation.navigate('List')}
                 />
