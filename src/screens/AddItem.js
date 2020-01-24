@@ -17,9 +17,7 @@ export default class AddItem extends Component {
         this.handleChange = this.handleChange.bind(this)
     }
     handleChange(event) {
-        // event.persist()
         this.setState({ name: event })
-        // console.log(this.state)
     }
 
     render() {
