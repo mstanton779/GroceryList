@@ -8,7 +8,6 @@ export default class List extends Component {
         items: [],
     }
     async componentDidMount() {
-        console.log('in CDM')
         const { data } = await axios.get(`${SERVER_URL}/api/products`)
         this.setState({ items: data })
     }
