@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 30,
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         backgroundColor: '#6565fc',
     },
     title: {

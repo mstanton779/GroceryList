@@ -19,7 +19,6 @@ router.get('/', async (req, res, next) => {
 })
 router.post('/', async (req, res, next) => {
     try {
-        console.log(req.body)
         let { name, quantity } = req.body
         const lowerName = name.toLowerCase()
         const product = await Product.findOne({
@@ -38,6 +37,14 @@ router.post('/', async (req, res, next) => {
             })
             res.send(list)
         }
+    } catch (err) {
+        next(err)
+    }
+})
+router.delete('/:id', async (req, res, next) => {
+    try {
+        await List.destroy({ where: { id: req.params.id } })
+        res.sendStatus(200)
     } catch (err) {
         next(err)
     }

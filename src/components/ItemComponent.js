@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     itemsList: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
     },
     itemtext: {
         fontSize: 24,

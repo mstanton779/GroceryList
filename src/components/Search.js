@@ -39,7 +39,7 @@ export default class Search extends React.Component {
         } catch (err) {
             console.log(err)
             Toast.show({
-                text: err,
+                text: err.message,
                 duration: 3000,
                 position: 'bottom',
             })

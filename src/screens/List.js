@@ -44,7 +44,7 @@ export default class List extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         backgroundColor: '#ebebeb',
     },
 })
