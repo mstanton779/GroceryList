@@ -14,7 +14,7 @@ const seed = async () => {
         })
         const beverages = await Aisle.create({ name: 'beverages' })
         const beer = await Product.create({ name: 'beer' })
-        const deoderant = await Product.create({ name: 'deoderant' })
+        const deoderant = await Product.create({ name: 'deodorant' })
         const selfCare = await Aisle.create({ name: 'self care' })
         const potatoChips = await Product.create({ name: 'potato chips' })
         const snacks = await Aisle.create({ name: 'snacks' })

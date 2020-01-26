@@ -7,38 +7,93 @@ import {
     TextInput,
     Alert,
 } from 'react-native'
+import { Toast } from 'native-base'
 import axios from 'axios'
 import Confetti from 'react-native-confetti'
-const SERVER_URL = 'http://172.17.21.173:8080'
+import Search from '../components/Search'
+const SERVER_URL = 'http://10.0.0.133:8080'
 
 export default class AddItem extends Component {
     constructor() {
         super()
         this.state = {
             name: '',
+            error: false,
+            searchResults: [],
         }
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
     async handleSubmit() {
         try {
-            this.setState({ name: this.state.name.toLowerCase() })
-            console.log('handle', this.state)
-            const { data } = await axios.post(
-                `${SERVER_URL}/api/list`,
-                this.state
-            )
+            // this.setState({ name: this.state.name.toLowerCase() })
+            const data = await axios.post(`${SERVER_URL}/api/list`, this.state)
+            console.log('message', data)
+            if (data === 'Nope') {
+                Toast.show({
+                    type: 'danger',
+                    duration: 3000,
+                    text: `Error! Could not find ${this.state.name}`,
+                    position: 'bottom',
+                })
+            }
+            console.log(this.state)
+        } catch (err) {
+            console.log(err)
+            Toast.show({
+                type: 'danger',
+                text: `${this.state.name[0].toUpperCase()}${this.state.name.slice(
+                    1
+                )} was not found ${err.message}`,
+                duration: 3000,
+                position: 'bottom',
+            })
+        }
+    }
+    async handleChange(event) {
+        try {
+            const { text } = event.nativeEvent
+            if (text === '') {
+                const shorterSearch = this.state.name.slice(
+                    0,
+                    this.state.name.length - 1
+                )
+                this.setState(
+                    { ...this.state, name: shorterSearch },
+                    this.searchHelper
+                )
+            } else {
+                const search = text
+                this.setState(
+                    {
+                        ...this.state,
+                        name: search,
+                    },
+                    this.searchHelper
+                )
+            }
         } catch (err) {
             console.log(err)
         }
     }
-
+    async searchHelper() {
+        try {
+            const { data } = await axios.get(
+                `${SERVER_URL}/api/list/search?search=${this.state.name}`
+            )
+            this.setState({ ...this.state, searchResults: data })
+        } catch (err) {
+            console.log(err)
+        }
+    }
     render() {
         return (
             <View style={styles.main}>
                 <Text style={styles.title}>Add Item</Text>
                 <TextInput
                     style={styles.itemInput}
-                    onChangeText={name => this.setState({ name })}
+                    onChange={this.handleChange}
+                    value={this.state.name}
                     name="name"
                 />
                 <TouchableHighlight
@@ -48,6 +103,9 @@ export default class AddItem extends Component {
                 >
                     <Text style={styles.buttonText}>Add</Text>
                 </TouchableHighlight>
+                {this.state.searchResults.map(result => {
+                    return <Search key={result.id} result={result} />
+                })}
             </View>
         )
     }

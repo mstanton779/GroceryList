@@ -3,10 +3,12 @@ import { View, Text, StyleSheet } from 'react-native'
 import ItemComponent from '../components/ItemComponent'
 import axios from 'axios'
 import Aisle from '../components/Aisle'
-const SERVER_URL = 'http://172.17.21.173:8080'
+import { Spinner } from 'native-base'
+const SERVER_URL = 'http://10.0.0.133:8080'
 export default class List extends Component {
     state = {
         items: [],
+        isReady: false,
     }
     async componentDidMount() {
         try {
@@ -15,14 +17,17 @@ export default class List extends Component {
             for (let i = 1; i < 9; i++) {
                 arrayAisle.push(data.filter(item => item.aisle === i))
             }
-            console.log(arrayAisle)
-            this.setState({ items: arrayAisle })
+            this.setState({ ...this.state, items: arrayAisle })
+            this.setState({ ...this.state, isReady: true })
         } catch (err) {
             console.log(err)
         }
     }
 
     render() {
+        if (!this.state.isReady) {
+            return <Spinner color="red" />
+        }
         return (
             <View style={styles.container}>
                 {this.state &&
