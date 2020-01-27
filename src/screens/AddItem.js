@@ -96,13 +96,13 @@ export default class AddItem extends Component {
                     value={this.state.name}
                     name="name"
                 />
-                <TouchableHighlight
+                {/* <TouchableHighlight
                     style={styles.button}
                     underlayColor="white"
                     onPress={this.handleSubmit}
                 >
                     <Text style={styles.buttonText}>Add</Text>
-                </TouchableHighlight>
+                </TouchableHighlight> */}
                 {this.state.searchResults.map(result => {
                     return <Search key={result.id} result={result} />
                 })}

@@ -27,7 +27,6 @@ export default class Search extends React.Component {
                     text: `Error! Could not find ${this.state.searchResult.name}`,
                 })
             } else {
-                console.log(data)
                 Toast.show({
                     text: `${data.product[0].toUpperCase()}${data.product.slice(
                         1
