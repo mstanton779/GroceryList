@@ -17,6 +17,20 @@ router.get('/', async (req, res, next) => {
         next(err)
     }
 })
+router.post('/barcode/', async (req, res, next) => {
+    try {
+        const { data } = req.body
+        const product = await Product.findOne({ where: { barcode: data } })
+        const { aisleId, name } = product
+        const list = await List.create({
+            product: name,
+            aisle: aisleId,
+        })
+        res.send(list)
+    } catch (err) {
+        next(err)
+    }
+})
 router.post('/', async (req, res, next) => {
     try {
         let { name, quantity } = req.body
@@ -26,7 +40,6 @@ router.post('/', async (req, res, next) => {
             include: [{ model: Aisle }],
         })
         if (product === null) {
-            console.log('back')
             res.status(404).send({ message: 'Nope' })
         } else {
             const { aisleId } = product
@@ -41,6 +54,7 @@ router.post('/', async (req, res, next) => {
         next(err)
     }
 })
+
 router.delete('/:id', async (req, res, next) => {
     try {
         await List.destroy({ where: { id: req.params.id } })

@@ -21,9 +21,15 @@ const seed = async () => {
         const bakingCondiments = await Aisle.create({
             name: 'baking and condiments',
         })
-        const mustard = await Product.create({ name: 'mustard' })
+        const mustard = await Product.create({
+            name: 'mustard',
+            barcode: '0042421160024',
+        })
         const worldFoods = await Aisle.create({ name: 'world foods' })
-        const pasta = await Product.create({ name: 'pasta' })
+        const pasta = await Product.create({
+            name: 'pasta',
+            barcode: '0857183005441',
+        })
         await pasta.setAisle(worldFoods)
         await mustard.setAisle(bakingCondiments)
         await potatoChips.setAisle(snacks)

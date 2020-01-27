@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import ItemComponent from '../components/ItemComponent'
+import { View, StyleSheet } from 'react-native'
 import axios from 'axios'
 import Aisle from '../components/Aisle'
 import { Spinner } from 'native-base'

@@ -1,15 +1,7 @@
 import React, { Component } from 'react'
-import {
-    View,
-    Text,
-    TouchableHighlight,
-    StyleSheet,
-    TextInput,
-    Alert,
-} from 'react-native'
+import { View, Text, StyleSheet, TextInput } from 'react-native'
 import { Toast } from 'native-base'
 import axios from 'axios'
-import Confetti from 'react-native-confetti'
 import Search from '../components/Search'
 const SERVER_URL = 'http://10.0.0.133:8080'
 
@@ -26,9 +18,7 @@ export default class AddItem extends Component {
     }
     async handleSubmit() {
         try {
-            // this.setState({ name: this.state.name.toLowerCase() })
             const data = await axios.post(`${SERVER_URL}/api/list`, this.state)
-            console.log('message', data)
             if (data === 'Nope') {
                 Toast.show({
                     type: 'danger',
@@ -37,7 +27,6 @@ export default class AddItem extends Component {
                     position: 'bottom',
                 })
             }
-            console.log(this.state)
         } catch (err) {
             console.log(err)
             Toast.show({
@@ -95,14 +84,8 @@ export default class AddItem extends Component {
                     onChange={this.handleChange}
                     value={this.state.name}
                     name="name"
+                    placeholder="Add a grocery..."
                 />
-                {/* <TouchableHighlight
-                    style={styles.button}
-                    underlayColor="white"
-                    onPress={this.handleSubmit}
-                >
-                    <Text style={styles.buttonText}>Add</Text>
-                </TouchableHighlight> */}
                 {this.state.searchResults.map(result => {
                     return <Search key={result.id} result={result} />
                 })}

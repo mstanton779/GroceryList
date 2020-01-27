@@ -1,11 +1,6 @@
 import React from 'react'
-import {
-    View,
-    Text,
-    StyleSheet,
-    ProgressBarAndroidComponent,
-} from 'react-native'
-import { List, ListItem, Icon, Button } from 'native-base'
+import { View, Text, StyleSheet } from 'react-native'
+import { List } from 'native-base'
 import SingleItem from './SingleItem'
 
 class Aisle extends React.Component {
@@ -42,7 +37,6 @@ const styles = StyleSheet.create({
     },
     itemtext: {
         fontSize: 24,
-        // fontWeight: 'bold',
         textAlign: 'center',
     },
 })

@@ -6,16 +6,19 @@ const SERVER_URL = 'http://10.0.0.133:8080'
 class SingleItem extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { deleted: false }
+        this.state = { deleted: false, product: {} }
     }
+    // componentDidMount() {
+    //     this.setState({ ...this.state, product: this.props.product })
+    //     console.log('single', this.state)
+    // }
     async handlePress(itemId) {
         try {
-            console.log('itemId', itemId)
             const { data } = await axios.delete(
                 `${SERVER_URL}/api/list/${itemId}`
             )
             if (data === 'OK') {
-                this.setState({ deleted: true })
+                this.setState({ ...this.state, deleted: true })
                 Toast.show({
                     text: 'Item deleted',
                     duration: 3000,

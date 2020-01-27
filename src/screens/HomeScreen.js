@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, View, StyleSheet } from 'react-native'
+import { Button, View } from 'react-native'
 
 export default class Home extends Component {
     render() {
@@ -13,6 +13,12 @@ export default class Home extends Component {
                     title="See Your Grocery List"
                     color="green"
                     onPress={() => this.props.navigation.navigate('List')}
+                />
+                <Button
+                    title="Add Grocery with Bar Code"
+                    onPress={() =>
+                        this.props.navigation.navigate('ScannerScreen')
+                    }
                 />
             </View>
         )

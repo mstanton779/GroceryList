@@ -9,6 +9,9 @@ const Product = db.define('product', {
     description: {
         type: Sequelize.STRING,
     },
+    barcode: {
+        type: Sequelize.STRING,
+    },
 })
 
 module.exports = Product
